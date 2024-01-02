@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style1.css"> 
+     
+    </head>
+    <body>
+        <div class="app">
+            <header class="app-header">
+                <div class="app-header-logo">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+                        </span>
+                        <h1 class="logo-title">
+                            <span>you</span>
+                            <span>study</span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="app-header-navigation">
+                    <div class="tabs">
+                        <a href="#">
+                            
+                        </a>
+                        <a href="#" class="active">
+                            create courses
+                        </a>
+                        <a href="#">
+                            manage courses
+                        </a>
+                        <a href="teacherfeedback.html">
+                            evoluate feedbacks
+                        </a>
+                      
+                        
+                    </div>
+                </div>
+                <div class="app-header-actions">
+                    <button class="user-profile">
+                        <span>name teacher</span>
+                        <span>
+                            <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+                        </span>
+                    </button>
+                    <div class="app-header-actions-buttons">
+                    
+                     
+                    </div>
+                </div>
+                <div class="app-header-mobile">
+                    <button class="icon-button large">
+                        <i class="ph-list"></i>
+                    </button>
+                </div>
+        
+            </header>
+            <div class="app-body">
+                <div class="app-body-navigation">
+                    <nav class="navigation">
+                        <a href="#">
+                            <i class="ph-browsers"></i>
+                            <span>create courses</span>
+                        </a>
+                        <a href="#">
+                            <i class="ph-check-square"></i>
+                            <span>manage courses</span>
+                        </a>
+                        <a href="#">
+                            <i class="ph-swap"></i>
+                            <span>evoluate feedbacks</span>
+                        </a>
+                        <a href="#">
+                            <i class="ph-file-text"></i>
+                            <span> initate voice calls</span>
+                        </a>
+                      
+                    </nav>
+                    <footer class="footer">
+                       
+                    </footer>
+                </div>
+                <h2>Upload courses</h2>
+                <div class="container">
+                    <form id="align-form">
+                       
+                        <div class="form-group">
+                            <h4>create coures</h4>
+                            <div class="form-group">
+                           
+                                <label for="message">create coures</label>
+                                <textarea name="msg" id="msg" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select name="subject" id="subject" class="form-control">
+                                    <option value="math">Math</option>
+                                    <option value="science">Science</option>
+                                    <option value="history">History</option>
+                                    <!-- Add more subjects as needed -->
+                                </select>
+                             
+                            </div>
+                      
+                     
+                        <div class="form-group">
+                            <label for="note">Student </label>
+                        
+                        </div>
+                        <p></p>
+                        
+                        <div class="form-group">
+                            <!-- Additional form elements if needed -->
+                        </div>
+                        <div class="form-group">
+                            <button type="button" id="post" class="btn">Post submition</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+<div class="drag-image">
+    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+    <h6>Drag & Drop File Here</h6>
+    <span>OR</span>
+    <button>Browse File</button>
+    <input type="file" hidden>
+  </div>
+  <script>
+    const dropArea = document.querySelector(".drag-image"),
+dragText = dropArea.querySelector("h6"),
+button = dropArea.querySelector("button"),
+input = dropArea.querySelector("input");
+let file; 
+
+button.onclick = ()=>{
+input.click(); 
+}
+
+input.addEventListener("change", function(){
+
+file = this.files[0];
+dropArea.classList.add("active");
+viewfile();
+});
+
+dropArea.addEventListener("dragover", (event)=>{
+event.preventDefault();
+dropArea.classList.add("active");
+dragText.textContent = "Release to Upload File";
+});
+
+
+dropArea.addEventListener("dragleave", ()=>{
+dropArea.classList.remove("active");
+dragText.textContent = "Drag & Drop to Upload File";
+}); 
+
+dropArea.addEventListener("drop", (event)=>{
+event.preventDefault(); 
+
+file = event.dataTransfer.files[0];
+viewfile(); 
+});
+
+function viewfile(){
+let fileType = file.type; 
+let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+if(validExtensions.includes(fileType)){ 
+let fileReader = new FileReader(); 
+fileReader.onload = ()=>{
+let fileURL = fileReader.result; 
+let imgTag = `<img src="${fileURL}" alt="image">`;
+dropArea.innerHTML = imgTag; 
+}
+fileReader.readAsDataURL(file);
+}else{
+alert("This is not an Image File!");
+dropArea.classList.remove("active");
+dragText.textContent = "Drag & Drop to Upload File";
+}
+}
+  </script>
+           </div>
+              
+        </div>
+    </div>
+    
+</body>
+</html>
